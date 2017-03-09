@@ -1,23 +1,26 @@
 <?php
 
-$a1=1;
-$a2=1; $a3=0;
-$x = rand(0,100);
-echo "Число ".$x."\n";
+$firstFib = 1;
+$secondFib =1; 
+$buffer = 0;
+$userNumber = rand(0,100);
+
+echo "The User's number is ".$userNumber."<br />";
+
 while (true)
     {   
-        if ($x<$a1)
+        if ($userNumber < $firstFib)
         {
-            echo "The number ".$x." is NOT in row \n";
+            echo "The number ".$userNumber." is NOT in row! <br />";
             break;
         }
-        if ($a1==$x)
+        if ($firstFib == $userNumber)
         {
-            echo "The number ".$x." is IN row \n";
+            echo "The number ".$userNumber." is IN row! <br />";
             break;
         }
-        $a3=$a1;
-        $a1=$a1+$a2;
-        $a2=$a3;
+        $buffer = $firstFib;
+        $firstFib = $firstFib + $secondFib;
+        $secondFib = $buffer;
     }
 ?>
