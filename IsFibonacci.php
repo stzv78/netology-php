@@ -23,4 +23,5 @@ while (true)
         $firstFib = $firstFib + $secondFib;
         $secondFib = $buffer;
     }
+    
 ?>
