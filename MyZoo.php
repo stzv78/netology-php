@@ -54,9 +54,6 @@ foreach ($myArray as $continent => $arrAnimals)
 foreach ($data as $continent => $arrAnimals)
 {
  	echo '<h1>' . $continent . '</h1>';
- 	foreach ($arrAnimals  as  $key => $value)
-	{
- 		echo '<p>' .$value . '</p>';
- 	}
+ 	echo implode(", ", $arrAnimals);
 }
 ?>
