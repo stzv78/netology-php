@@ -13,6 +13,7 @@ echo "<pre>";
 print_r($myArray); 
 echo "</pre>";
 
+
 //Формируем и выводим новый массив из названий животных, состоящих из двух слов (разделенных пробелом)
 $i=0;
 foreach ($myArray as $continent => $arrAnimals)
