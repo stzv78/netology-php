@@ -4,16 +4,16 @@ header('Content-Type: text/html;charset=UTF-8');
 
 $city = "Ульяновск"; 
 $appid = "4b4c6388094b33baacb43cb677b27c64";
-$mode = "json"; // в каком виде мы получим данные
-$units = "metric"; // Единицы измерения. metric или imperial
-$lang = "ru"; // язык
+$mode = "json"; 
+$units = "metric";
+$lang = "ru";
  
 // формируем url для запроса
 $url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=$city&appid=$appid&mode=$mode&units=$units&lang=$lang";
 // делаем запрос к API
 $data = file_get_contents($url);
-
 ?>
+
 <!DOCTYPE html>
 <html>
  <head>
@@ -56,9 +56,8 @@ $data = file_get_contents($url);
     	$arrayDays = $dataJson->list[0];
 
 		//получаем и выводим текущую дату 
-    	{
-			$date=explode(".", date("d.m.Y"));
-			switch ($date[1])
+    	$date=explode(".", date("d.m.Y"));
+		switch ($date[1])
 			{
 				case 1: $m='января'; break;
 				case 2: $m='февраля'; break;
@@ -73,12 +72,11 @@ $data = file_get_contents($url);
 				case 11: $m='ноября'; break;
 				case 12: $m='декабря'; break;
 			}
-		}
 		// выводим данные в таблицу
    		echo "<table class = \"table\" opacity = 0>";
    		echo "<tr>" . $date[0] . "&nbsp;" . $m . "&nbsp;" . $date[2] . "</tr>";
-   		echo "<tr align = \"center\"><td><h2>" . $city . "</h2><br/>";   
-        echo "<h1><img src =\"http://openweathermap.org/img/w/" . $arrayDays->weather[0]->icon . ".png\">" . $arrayDays->temp->day . "&deg C</h1></td></tr>"; 
+   		echo "<tr align = \"center\"><td><h2>" . $city . "</h2>";   
+        echo "<h1><img src =\"http://openweathermap.org/img/w/" . $arrayDays->weather[0]->icon . ".png\" height=100px>" . $arrayDays->temp->day . "&deg C</h1></td></tr>"; 
         echo "<tr><td>";
         echo "Скорость ветра: " . $arrayDays->speed . "м/с <br/>";
         echo "Осадки: " . $arrayDays->weather[0]->description . "<br/>";
