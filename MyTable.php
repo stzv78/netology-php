@@ -1,9 +1,7 @@
 <?php
 header('Content-type: text/html; charset=utf-8');
 $json_data = file_get_contents('http://university.netology.ru/u/stepcheva/data.json');
-//http://university.netology.ru/u/stepcheva/data.json
-$data = mb_convert_encoding($json_data,"UTF-8");
-$data = json_decode($data,true);
+$data = json_decode($json_data,true);
 ?>
 <!DOCTYPE html>
 <html>
