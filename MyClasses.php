@@ -108,7 +108,7 @@ class Product
     public function getDiscountPrice() 
     { if ($this->discount)
       {
-       return $this->price = $this->price - round($this->price*$this->discount / 100);
+       return $this->price - round($this->price * $this->discount / 100);
       }
     }
 } 
@@ -152,6 +152,7 @@ echo $myDuck2->swim() . "</br>";
 
 //продукт
 $myProduct1 = new Product('Tide Automat', 120, 5);
+echo $myProduct1->getDiscountPrice() . "</br>";
 echo $myProduct1->getDiscountPrice() . "</br>";
 
 $myProduct2 = new Product('Ariel Automat', 126, 3);
