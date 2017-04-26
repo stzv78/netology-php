@@ -4,19 +4,25 @@
 	$filelist = scandir($dir, 1);
 	
 	//получаем текущий $id файла теста для отображения в форме
-	if ($_POST)
+	if (!empty($_POST['test_id']))
 	{	
-		$id = $_POST['test_id'];	
-	} else {
-		$id = $_GET['test_id']-1;
+		$id = htmlspecialchars(stripslashes($_POST['test_id']));
+
+	} elseif (!empty($_GET['test_id'])&&(is_numeric($_GET['test_id'])))
+	{
+		$id = htmlspecialchars(stripslashes($_GET['test_id']))-1;
+	} else 
+	{
+		die("Некорретные данные!");
 	}
-
-	//читаем в массив содержимое файла теста
-	$json = $dir . "$filelist[$id]";
-	$test = json_decode(file_get_contents($json), true);
 	
-
-	if (!($_GET))
+	if ($id <= (count($filelist)-3))
+	{
+		//читаем в массив содержимое файла теста
+		$json = $dir . "$filelist[$id]";
+		$test = json_decode(file_get_contents($json), true);
+	
+	if (!($_GET['test_id']))
 	{	
 		//если данные для проверки теста пользователем отправлены, то проверяем ответы пользователя
 		if (isset($_POST['userAnswer']))
@@ -40,7 +46,9 @@
     		echo "Введите ответы!";
     	}
 	}
-
+	} else {
+		die("Файл не существует!<p><a href=\"list.php\">Выбрать другой тест</a></p>");
+	}
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +82,7 @@
 		echo "<strong> $key. ". $value['textQwestion'] . "</strong>";
 		foreach ($value['answer'] as $k => $val) 
 		{
-			echo  "<li><input type=\"radio\" name=\"userAnswer[" . $key . "]\" value=\"" . $k . "\">$val</li>";
+			echo  "<li><input type=\"radio\" name=\"userAnswer[" . $key . "]\" value=\"" . $k . "\" required>$val</li>";
 		}
 	}
 	?>

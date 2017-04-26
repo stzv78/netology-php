@@ -1,22 +1,33 @@
 <?php
-
-if ($_FILES)
+if (isset($_FILES['userfile']['name']))
 {   
 	$error = $_FILES['userfile']['error'];
 	if (!$error) 
-	{ 
+	{
 		$name = basename($_FILES['userfile']['name']);
-		$uploaddir = getcwd() . '/tests/' . $name;
-		if (file_exists($uploaddir)) //проверяем наличие одноименного файла на сервере
+		$type = strtolower(substr($name, 1+strrpos($name,".")));
+		$extentions = "json";
+		//проверяем расширение файла
+		if ($type != $extentions)
 		{
-		    echo "Файл $name уже существует. Выберите другой файл!</br>";
-		} else {
-		    //перемещаем файл из временной директории
-			$tmp_name = $_FILES['userfile']['tmp_name'];
-        	move_uploaded_file($tmp_name, $uploaddir);
-        	echo "Файл $name успешно отправлен!</br>";
-        }
-    } else {
+			echo "Файл имеет недопустимое расширение!";
+		} else 
+		{
+			$uploaddir = getcwd() . '/tests/' . $name;
+			if (file_exists($uploaddir)) //проверяем наличие одноименного файла на сервере
+			{
+		    	echo "Файл $name уже существует. Выберите другой файл!</br>";
+			} else {
+		    	//перемещаем файл из временной директории
+				$tmp_name = $_FILES['userfile']['tmp_name'];
+        		move_uploaded_file($tmp_name, $uploaddir);
+        		echo "Файл $name успешно отправлен!</br>";
+        	}
+		}
+	} elseif (empty(($_FILES['userfile']['name']))) 
+	{
+		echo "Файл не выбран!\n";
+	} else {
 		echo "Ошибка загрузки файла!\n";
 	}
 }
