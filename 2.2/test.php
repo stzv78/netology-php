@@ -4,17 +4,20 @@
 	$filelist = scandir($dir, 1);
 	
 	//получаем текущий $id файла теста для отображения в форме
-	if (!empty($_POST['test_id']))
+	if (isset($_POST['test_id']))
 	{	
 		$id = htmlspecialchars(stripslashes($_POST['test_id']));
-
-	} elseif (!empty($_GET['test_id'])&&(is_numeric($_GET['test_id'])))
+		
+	} elseif (isset($_GET['test_id'])&&(is_numeric($_GET['test_id'])))
 	{
 		$id = htmlspecialchars(stripslashes($_GET['test_id']))-1;
-	} else 
+	} 
+	else 
 	{
 		die("Некорретные данные!");
 	}
+	
+	$id = (intval($id));
 	
 	if ($id <= (count($filelist)-3))
 	{
@@ -22,7 +25,7 @@
 		$json = $dir . "$filelist[$id]";
 		$test = json_decode(file_get_contents($json), true);
 	
-	if (!($_GET['test_id']))
+	if (isset($_POST['test_id']))
 	{	
 		//если данные для проверки теста пользователем отправлены, то проверяем ответы пользователя
 		if (isset($_POST['userAnswer']))

@@ -1,7 +1,7 @@
 <?php
 
 $dir = getcwd() . '/tests/';
-$filelist = scandir($dir, 1);//получаем в массив все файлы из папки с тестами 
+$filelist = scandir($dir, 1);
 
 //если в папке есть файлы с тестами, то выводим их нумерованным списком
 function GetList($filelist)
@@ -27,7 +27,6 @@ function GetTest($filelist)
             echo "<option value=\"$id\">" . $filelist[$i] . "</option>";
         };
 }
-
 ?>
 
 <!DOCTYPE html>
