@@ -27,10 +27,10 @@ $data = json_decode($json_data,true);
             foreach($data as $person) 
             {
                 echo "<tr>";
-                echo "<td>" . $person['firstName'] ."</td>";
-                echo "<td>" . $person['lastName'] ."</td>";
-                echo "<td>" . $person['address'] ."</td>";
-                echo "<td>" . $person['phoneNumber'] ."</td>";
+                echo "<td>" . $person['firstName'] . "</td>";
+                echo "<td>" . $person['lastName'] . "</td>";
+                echo "<td>" . $person['address'] . "</td>";
+                echo "<td>" . $person['phoneNumber'] . "</td>";
                 echo "</tr>";
             }
         ?>
