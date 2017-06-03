@@ -1,26 +1,26 @@
 [{
   "firstName": "Иван",
   "lastName": "Иванов",
+  "address": "г.Москва, ул. Алиева,1",
+  "phoneNumber": "812 123-1231"
+}, {
+  "firstName": "Сергей",
   "address": "г.Москва, ул. Алиева,2",
+  "phoneNumber": "812 123-1232",
+  "lastName": "Сергеев"
+}, {
+  "firstName": "Петр",
+  "lastName": "Петров",
+  "address": "г.Москва, ул. Алиева,3",
+  "phoneNumber": "812 123-1233"
+}, {
+  "firstName": "Данил",
+  "lastName": "Данилов",
+  "address": "г.Москва, ул. Алиева,4",
   "phoneNumber": "812 123-1234"
 }, {
-  "firstName": "Иван",
-  "lastName": "Иванов",
-  "address": "г.Москва, ул. Алиева,2",
-  "phoneNumber": "812 123-1234"
-}, {
-  "firstName": "Иван",
-  "lastName": "Иванов",
-  "address": "г.Москва, ул. Алиева,2",
-  "phoneNumber": "812 123-1234"
-}, {
-  "firstName": "Иван",
-  "lastName": "Иванов",
-  "address": "г.Москва, ул. Алиева,2",
-  "phoneNumber": "812 123-1234"
-}, {
-  "firstName": "Иван",
-  "lastName": "Иванов",
-  "address": "г.Москва, ул. Алиева,2",
-  "phoneNumber": "812 123-1234"
+  "firstName": "Павел",
+  "lastName": "Павлов",
+  "address": "г.Москва, ул. Алиева,5",
+  "phoneNumber": "812 123-1235"
 }]
