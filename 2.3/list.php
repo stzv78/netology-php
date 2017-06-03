@@ -1,31 +1,32 @@
 <?php
-
 $dir = getcwd() . '/tests/';
 $filelist = scandir($dir, 1);//получаем в массив все файлы из папки с тестами 
 
 //если в папке есть файлы с тестами, то выводим их нумерованным списком
 function GetList($filelist)
 {   
-    if (!$filelist) 
-        {
-            echo "<h3>Тесты не найдены!</h3>";
-        } else {
-            echo "<h3>Список тестов:</h3><ol>";
-            for ($i = 0; $i < (count($filelist)-2); $i++)
-                {   
-                    echo '<li>' . $filelist[$i] . '</li>';
-                 };
-            echo "</ol>"; 
+    if (!$filelist) {
+        echo "<h3>Тесты не найдены!</h3>";
+    } else {
+        echo "<h3>Список тестов:</h3><ol>";
+        foreach ($filelist as $i => $file) { 
+            if (!in_array($file, array('.', '..'))) {
+                echo '<li>' . $file . '</li>';
+            }
         }
+        echo "</ol>"; 
+    }
 }
+
 //получаем содержимое теста по его номеру ($id)
 function GetTest($filelist)
 {   
-    for ($i = 0; $i < (count($filelist)-2); $i++)
-        {   
+    foreach ($filelist as $i => $file) { 
+        if (!in_array($file, array('.', '..'))) {
             $id = $i+1;
-            echo "<option value=\"$id\">" . $filelist[$i] . "</option>";
-        };
+            echo "<option value=\"$id\">" . $file . "</option>";
+        } 
+    }
 }
 ?>
 
@@ -50,7 +51,6 @@ function GetTest($filelist)
     </fieldset>
 </form>
 <p><a href="admin.php">Загрузить новый тест</a></p>
-
 </span>
 </body>
 </html>
