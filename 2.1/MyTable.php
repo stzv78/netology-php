@@ -24,14 +24,14 @@ $data = json_decode($json_data,true);
 
         <tbody>
         <?php 
-            foreach ($data as $key => $person) 
+            foreach($data as $person) 
             {
-                echo '<tr>';
-                foreach ($person as $person["firstName"])
-                {
-                    echo '<td>' . $person["firstName"] . '</td>';
-                }
-                echo '</tr>';
+                echo "<tr>";
+                echo "<td>" . $person['firstName'] ."</td>";
+                echo "<td>" . $person['lastName'] ."</td>";
+                echo "<td>" . $person['address'] ."</td>";
+                echo "<td>" . $person['phoneNumber'] ."</td>";
+                echo "</tr>";
             }
         ?>
         </tbody>
