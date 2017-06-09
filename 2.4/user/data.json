@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "userName": "Иван Иванович Сахновский",
+    "login":"admin",
+    "password":"3731941d31656d108606f280a4ad3c6c"
+  },
+  {
+    "id": 2,
+    "userName": "Андрей",
+    "login":"andrey",
+    "password":"2fed75cf37b7c59dfa16e26493ec8358"
+  }
+]
