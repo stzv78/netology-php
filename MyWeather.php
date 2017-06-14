@@ -1,7 +1,4 @@
 <?php
-// кодировка страницы
-header('Content-Type: text/html;charset=UTF-8');
-
 $city = "Ульяновск"; 
 $appid = "4b4c6388094b33baacb43cb677b27c64";
 $mode = "json"; 
@@ -12,6 +9,44 @@ $lang = "ru";
 $url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=$city&appid=$appid&mode=$mode&units=$units&lang=$lang";
 // делаем запрос к API
 $data = file_get_contents($url);
+
+function makeTable($data, $city = "Ульяновск") {
+  // декодируем полученные данные
+    $dataJson = json_decode($data);
+
+    // забираем в массив погодные условия для текущего дня
+    $arrayDays = $dataJson->list[0];
+
+    //получаем и выводим текущую дату 
+    $dat=explode(".", date("d.m.Y"));
+    
+    switch ($dat[1])
+      {
+        case 1: $m='января'; break;
+        case 2: $m='февраля'; break;
+        case 3: $m='марта'; break;
+        case 4: $m='апреля'; break;
+        case 5: $m='мая'; break;
+        case 6: $m='июня'; break;
+        case 7: $m='июля'; break;
+        case 8: $m='августа'; break;
+        case 9: $m='сентября'; break;
+        case 10: $m='октября'; break;
+        case 11: $m='ноября'; break;
+        case 12: $m='декабря'; break;
+      }
+    // выводим данные в таблицу
+      echo "<table class = \"table\" opacity = 0>";
+      echo "<tr>" . $dat[0] . "&nbsp;" . $m . "&nbsp;" . $dat[2] . "</tr>";
+      echo "<tr align = \"center\"><td><h2>" . $city . "</h2>";   
+        echo "<img src =\"http://openweathermap.org/img/w/" . $arrayDays->weather[0]->icon . ".png\" height=100px> <h1>" . $arrayDays->temp->day . "&deg C</h1></td></tr>"; 
+        echo "<tr><td>";
+        echo "Скорость ветра: " . $arrayDays->speed . "м/с <br/>";
+        echo "Осадки: " . $arrayDays->weather[0]->description . "<br/>";
+        echo "Давление: " . $arrayDays->pressure . "<br/>";
+        echo "Влажность: " . $arrayDays->humidity . "% <br/>";
+        echo "</td></tr></table>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -49,45 +84,11 @@ $data = file_get_contents($url);
  	<?php
  	// если получили данные
 	if($data){
-    	// декодируем полученные данные
-   		$dataJson = json_decode($data);
-
-    	// забираем в массив погодные условия для текущего дня
-    	$arrayDays = $dataJson->list[0];
-
-		//получаем и выводим текущую дату 
-    	$date=explode(".", date("d.m.Y"));
-		switch ($date[1])
-			{
-				case 1: $m='января'; break;
-				case 2: $m='февраля'; break;
-				case 3: $m='марта'; break;
-				case 4: $m='апреля'; break;
-				case 5: $m='мая'; break;
-				case 6: $m='июня'; break;
-				case 7: $m='июля'; break;
-				case 8: $m='августа'; break;
-				case 9: $m='сентября'; break;
-				case 10: $m='октября'; break;
-				case 11: $m='ноября'; break;
-				case 12: $m='декабря'; break;
-			}
-		// выводим данные в таблицу
-   		echo "<table class = \"table\" opacity = 0>";
-   		echo "<tr>" . $date[0] . "&nbsp;" . $m . "&nbsp;" . $date[2] . "</tr>";
-   		echo "<tr align = \"center\"><td><h2>" . $city . "</h2>";   
-        echo "<h1><img src =\"http://openweathermap.org/img/w/" . $arrayDays->weather[0]->icon . ".png\" height=100px>" . $arrayDays->temp->day . "&deg C</h1></td></tr>"; 
-        echo "<tr><td>";
-        echo "Скорость ветра: " . $arrayDays->speed . "м/с <br/>";
-        echo "Осадки: " . $arrayDays->weather[0]->description . "<br/>";
-        echo "Давление: " . $arrayDays->pressure . "<br/>";
-        echo "Влажность: " . $arrayDays->humidity . "% <br/>";
-        echo "</td></tr></table>";
-
+    makeTable($data);   
     }else{
     	echo "Сервер не доступен!";
 	}	
-?>
+  ?>
  	</div>
  </body>
 </html>
