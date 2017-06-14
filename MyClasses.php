@@ -43,7 +43,8 @@ class MyTV
    
     public function show($favouriteChannal) 
     { 
-      echo "Показываю ваш любимый канал - " . $this->favouriteChannal = $favouriteChannal . "!!!";
+      $this->favouriteChannal = $favouriteChannal;
+      echo "Показываю ваш любимый канал - " . $this->favouriteChannal . "!!!";
     }
     
     public function getFavouriteChannal() 
