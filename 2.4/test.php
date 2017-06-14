@@ -16,7 +16,6 @@ $filelist = scandir($dir, 1);
 //получаем текущий $id файла теста 
 if (isset($_POST['test_id'])) {	
     $id = (int)(htmlspecialchars(stripslashes($_POST['test_id'])));
-
 } elseif (isset($_GET['test_id'])&&(is_numeric($_GET['test_id']))) {
     $id = htmlspecialchars(stripslashes($_GET['test_id']))-1;
 } else {
@@ -25,10 +24,9 @@ if (isset($_POST['test_id'])) {
 
 $id = (intval($id));
 
-if (($_GET['status']) === 'Удалить тест') {
+if (isset($_GET['status'])&&($_GET['status'] === 'Удалить тест')) {
     
     if ($role = 'admin') {
-    
     $filepath = $dir . $filelist[$id];
     DeleteList($filelist, $filepath);
     die("Файл $filepath удален! <p><a href=\"list.php\">Список тестов</a></p>");
@@ -50,13 +48,11 @@ if ($id <= (count($filelist)-3)&&($id >= 0)) {
             $userAnswer = $_POST['userAnswer'];
             if(count($userAnswer) === count($test)) {	
                 $result = 0;
-                    
                 foreach ($test as $key => $value) {	
                     if ($value['correct'] == $userAnswer[$key]) {
                         $result++;
                     }
                 }
-                
                 echo "$userName, Ваш результат: $result правильных из " . count($userAnswer);
                 $_SESSION['result'] = $result;
                 if ($result > 0) {
