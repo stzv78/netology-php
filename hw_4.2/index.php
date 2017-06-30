@@ -3,6 +3,7 @@ session_start();
 require_once 'DataBase.php';
 
 $objDb = new DataBase;
+$action = "";
 
 if (isset($_POST['addTask'])) {
 	$action = (isset($_POST['addTask'])) ? 'addTask': "";
