@@ -27,7 +27,7 @@
     <?php else: ?>
     <div class="form">
         <form method="POST" action="index.php">
-            <input class="field" type="text" name="description" placeholder="Описание задачи" value="">
+            <input class="field" type="text" name="description" placeholder="Описание задачи" value="" required>
             <input type="submit" name="addTask" value="Добавить задачу">
         </form>
         <form method="POST" action="index.php">

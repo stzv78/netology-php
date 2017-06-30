@@ -27,9 +27,8 @@ class DataBase
     }
     public function selectAllData($order)
     {   
-    	$sql = "SELECT SQL_CALC_FOUND_ROWS * FROM `tasks` ORDER BY :order";
+        $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM `tasks` ORDER BY " . $order;
         $st = $this->connection->prepare($sql);
-        $st->bindValue( ":order", $order, PDO::PARAM_INT);
         $st->execute();
         return  $st->fetchALL(PDO::FETCH_ASSOC);
     }
