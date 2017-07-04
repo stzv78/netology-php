@@ -66,15 +66,14 @@ class DataBase
         $st->execute();
     }
     
-    //выбирает все задачи по id автора-пользователя 
-    public function selectUsersTasks($id, $order)
+    //выбирает все задачи пользователей из БД
+    public function selectUsersTasks($order)
     { 
         $sql = "SELECT t.id, t.assigned_user_id, t.user_id, t.date_added, t.is_done, t.description, u.login
                       FROM task t
                       INNER JOIN user u ON  u.id = t.user_id
-                      WHERE t.user_id LIKE :id  ORDER BY t." . $order;
+                      ORDER BY t." . $order;
         $st = $this->connection->prepare($sql);
-        $st->bindValue( ":id", $id, PDO::PARAM_INT);
         $st->execute();          
         return  $st->fetchALL(PDO::FETCH_ASSOC);
     }
