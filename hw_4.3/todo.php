@@ -63,7 +63,7 @@ switch ($action) {
 
 $order  = ($action == 'order') ?  $order : "date_added";
 
-$tasks  = $objDb->selectUsersTasks($user_id, $order);
+$tasks  = $objDb->selectUsersTasks($order);
 
 $users = $objDb->selectAllData('user', 'id');
 
