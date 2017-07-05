@@ -15,7 +15,7 @@ if (isset($_POST['addTask'])) {
 } elseif (isset($_GET['action'])) {
 	$action = (isset($_GET['action'])) ? strip_tags(htmlspecialchars($_GET['action'])) : "";
 	$id = intval($_GET['id']);
-	$description = strip_tags(htmlspecialchars($_GET['description']));
+	$description = ($action === 'edit') ? strip_tags(htmlspecialchars($_GET['description'])) : "";
 } elseif(isset($_POST['order'])) {
 	$action = (isset($_POST['order'])) ? 'order' : "";
 	$order = strip_tags(htmlspecialchars($_POST['order_by']));
@@ -39,19 +39,19 @@ switch ($action) {
         }
         break;
     case 'change':
-        //изменяем задачу
+        //изменяем задачу по ее id
         $objDb->editData($id, $description);
         break;
     case 'done':
-        //отмечаем задачу
+        //отмечаем задачу по ее id
         $objDb->markData($id);
         break;
     case 'delete':
-        //удаляем задачу
+        //удаляем задачу по ее id
         $objDb->deleteData($id);
         break;
     case 'assigned_user_id':
-        //назначаем задачу пользователю
+        //назначаем задачу пользователю по ее id
         $objDb->setAssignedUserId($id, $assigned_user_id);
         break;
        
