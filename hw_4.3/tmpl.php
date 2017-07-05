@@ -109,8 +109,8 @@
                 <tr>
                     <td><?php echo htmlspecialchars($val['description'], ENT_QUOTES); ?></td>
                     <td><?php echo htmlspecialchars($val['author'], ENT_QUOTES); ?></td>
-                    <td><?php echo $value['date_added']; ?></td>
-                    <?php if ($value['is_done'] == true): ?>
+                    <td><?php echo $val['date_added']; ?></td>
+                    <?php if ($val['is_done'] == true): ?>
                         <td style='color: green;'>Выполнено</td>
                         <td><a href="?id=<?php echo $val['id']; ?>&action=delete">Удалить</a></td>
                     <?php else: ?>
