@@ -9,10 +9,6 @@ $user_id = $_SESSION['user_id'];
 $objDb = new DataBase;
 $action = "";
 
-print "<pre>";
-var_dump($_POST);
-print "</pre>";
-
 if (isset($_POST['addTask'])) {
 	$action = (isset($_POST['addTask'])) ? 'addTask': "";
 	$description = (isset($_POST['addTask'])) ? strip_tags(htmlspecialchars($_POST['description'])) : "";
@@ -67,11 +63,8 @@ $tasks  = $objDb->selectUsersTasks($order);
 
 $users = $objDb->selectAllData('user', 'id');
 
-
 $myTasks = $objDb->selectMyTasks($user_id, $order);
-//получить список пользователей из таблицы user
-//получить список всех задач из таблицы task
-//запросить страницу cо списком дел
+
 require_once 'tmpl.php';
 
 

@@ -57,9 +57,7 @@
                 <th>Описание задачи</th>
                 <th>Автор</th>
                 <th>Дата добавления</th>
-                <?php if ($action === 'assigned_user_id'): ?>
                 <th>Исполнитель</th> 
-                <?php endif; ?> 
                 <th>Статус</th>
                 <th>Действия</th>
                 <th>Назначить пользователю:</th>
@@ -67,13 +65,10 @@
             <?php foreach ($tasks as $key => $value): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($value['description'], ENT_QUOTES); ?></td>
-                    <td><?php echo htmlspecialchars($value['login'], ENT_QUOTES); ?></td>
+                    <td><?php echo htmlspecialchars($value['author'], ENT_QUOTES); ?></td>
                     <td><?php echo $value['date_added']; ?></td>
-                    
-                    <?php if ($action === 'assigned_user_id'): ?>
-                    <td><?php echo $value['assigned_user_id']; ?></td>
-                    <?php endif; ?> 
-
+                    <td><?php echo $value['assigned_user']; ?></td>
+                 
                     <?php if ($value['is_done'] == true): ?>
                         <td style='color: green;'>Выполнено</td>
                         <td><a href="?id=<?php echo $value['id']; ?>&action=delete">Удалить</a></td>
@@ -110,20 +105,20 @@
                 <th>Статус</th>
                 <th>Действия</th>
             </tr>
-            <?php foreach ($myTasks as $key => $value): ?>
+            <?php foreach ($myTasks as $key => $val): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($value['description'], ENT_QUOTES); ?></td>
-                    <td><?php echo htmlspecialchars($value['login'], ENT_QUOTES); ?></td>
+                    <td><?php echo htmlspecialchars($val['description'], ENT_QUOTES); ?></td>
+                    <td><?php echo htmlspecialchars($val['author'], ENT_QUOTES); ?></td>
                     <td><?php echo $value['date_added']; ?></td>
                     <?php if ($value['is_done'] == true): ?>
                         <td style='color: green;'>Выполнено</td>
-                        <td><a href="?id=<?php echo $value['id']; ?>&action=delete">Удалить</a></td>
+                        <td><a href="?id=<?php echo $val['id']; ?>&action=delete">Удалить</a></td>
                     <?php else: ?>
                         <td style='color: red;'>Не выполнено</td>
                         <td>
-                        <a href="?id=<?php echo $value['id']; ?>&description=<?php echo $value['description']; ?>&action=edit">Изменить</a>
-                        <a href="?id=<?php echo $value['id']; ?>&action=done">Выполнить</a>
-                        <a href="?id=<?php echo $value['id']; ?>&action=delete">Удалить</a>
+                        <a href="?id=<?php echo $val['id']; ?>&description=<?php echo $val['description']; ?>&action=edit">Изменить</a>
+                        <a href="?id=<?php echo $val['id']; ?>&action=done">Выполнить</a>
+                        <a href="?id=<?php echo $val['id']; ?>&action=delete">Удалить</a>
                     </td>
                     <?php endif; ?>
                </tr>
