@@ -69,29 +69,34 @@ class DataBase
     //выбирает все задачи пользователей из БД
     public function selectUsersTasks($order)
     { 
-        $sql = "SELECT t.id, t.assigned_user_id, t.user_id, t.date_added, t.is_done, t.description, u.login
+        $sql = "SELECT t.id, t.description, t.date_added, t.is_done, u.login AS author, u1.login AS assigned_user
                       FROM task t
-                      INNER JOIN user u ON  u.id = t.user_id
+                      LEFT JOIN user u ON u.id = t.user_id
+                      LEFT JOIN user u1 ON u1.id = t.assigned_user_id
                       ORDER BY t." . $order;
         $st = $this->connection->prepare($sql);
         $st->execute();          
-        return  $st->fetchALL(PDO::FETCH_ASSOC);
+        return $st->fetchALL(PDO::FETCH_ASSOC);
+       
     }
 
     
     //выбирает все задачи, назначенные пользователю 
     public function selectMyTasks($id, $order)
     { 
-        $sql = "SELECT t.id, t.user_id, t.assigned_user_id, t.date_added, t.is_done, t.description, u.login
+        $sql = "SELECT t.id, t.date_added, t.is_done, t.description, u.login AS author
                       FROM task t
-                      INNER JOIN user u ON  u.id = t.assigned_user_id
-                      WHERE t.assigned_user_id LIKE :id  ORDER BY t." . $order;
+                      INNER JOIN user u ON u.id = t.user_id
+                      INNER JOIN user u1 ON  u1.id = t.assigned_user_id
+                      WHERE t.assigned_user_id LIKE :id
+                      ORDER BY t." . $order;
         $st = $this->connection->prepare($sql);
         $st->bindValue( ":id", $id, PDO::PARAM_INT);
         $st->execute();          
         return  $st->fetchALL(PDO::FETCH_ASSOC);
     }
 
+   
     public function setAssignedUserId($id, $assigned_user_id)
     {   
         $sql = "UPDATE `task` SET `assigned_user_id` = :assigned_user_id WHERE `id` LIKE :id";
