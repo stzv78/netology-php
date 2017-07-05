@@ -1,9 +1,11 @@
 <?php
+
+
 return array(
     'host' => 'localhost',
     'charset' => 'utf8',
-    'dbName' => 'dbase',
-    'userName' => 'root',
-    'userPassword' => ''
+    'dbName' => 'stepcheva',
+    'userName' => 'stepcheva',
+    'userPassword' => 'neto0999'
 );
 ?>
