@@ -14,14 +14,13 @@ print_r($myArray);
 
 $b = array();
 
-//Формируем новый массив.Он будет состоять из названий животных в два слова
+//Формируем новый массив. Он будет состоять из названий животных в два слова
 foreach ($myArray as $continent => $arrAnimals)
 {
 	foreach ($arrAnimals  as  $key => $value)
 	{   
 		$tmp = explode(" ", $value);
-		echo $value;
-		if (count($tmp) !==2 )
+		if (count($tmp) !== 2 )
 		{
 			unset($myArray[$continent][$key]);
 		} else {
@@ -30,8 +29,8 @@ foreach ($myArray as $continent => $arrAnimals)
 		}
     }
 }
+
 //перемешали вторые слова
-print_r($myArray);
 shuffle($b);
 print_r($b);
 echo "</pre>";
