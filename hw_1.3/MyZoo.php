@@ -1,6 +1,6 @@
 <?php 
  
- //Исходный многомерный массив 
+//Исходный многомерный массив 
 $myArray = array (
 	'Africa' => array('Rhinoceros','Agama agama','Alcelaphus caama',), 
 	'North America' => array('Mammuthus columbi','Vulpes macrotis'), 
@@ -12,41 +12,41 @@ $myArray = array (
 echo "<pre>"; 
 print_r($myArray); 
 
-
-$array = array();
 $b = array();
 
 //Формируем новый массив.Он будет состоять из названий животных в два слова
 foreach ($myArray as $continent => $arrAnimals)
 {
 	foreach ($arrAnimals  as  $key => $value)
-	{
-		if (str_word_count($value) === 2)
-		{    
-			$tmp = explode(" ", $value); //разбили по словам
-			$b[] = array_pop($tmp); //извлекли второе слово
-			$array[$continent][] = $tmp; //сохранили первое слово
- 	    }
+	{   
+		$tmp = explode(" ", $value);
+		echo $value;
+		if (count($tmp) !==2 )
+		{
+			unset($myArray[$continent][$key]);
+		} else {
+			$myArray[$continent][$key] = $tmp['0'];
+			$b[] = $tmp['1'];
+		}
     }
-    
 }
 //перемешали вторые слова
+print_r($myArray);
 shuffle($b);
 print_r($b);
 echo "</pre>";
 
 //Формируем новый массив из названий выдуманных животных, сохраняя регион обитания
-foreach ($array as $continent => $arrAnimals)
+foreach ($myArray as $continent => $arrAnimals)
 {
  	foreach ($arrAnimals  as  $key => $value)
 	{   
-		$value[] = array_shift($b); //добавили второе слово в массив
-		$array[$continent][$key] = implode(' ', $value);
+		$myArray[$continent][$key] = "$value " . array_shift($b);
     }
 }
 
 //Вывод результата
-foreach ($array as $continent => $arrAnimals)
+foreach ($myArray as $continent => $arrAnimals)
 {
  	echo '<h1>' . $continent . '</h1>';
  	echo implode(", ", $arrAnimals);
